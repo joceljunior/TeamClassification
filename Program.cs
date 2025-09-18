@@ -53,7 +53,9 @@ app.MapHub<ClassificationHub>("/classificationHub");
 
 // Add health check endpoint
 app.MapGet("/health", () => "OK");
-app.MapGet("/", () => "TeamClassification API is running!");
+
+// Serve frontend on root path - fallback to index.html
+app.MapFallbackToFile("index.html");
 
 // Ensure database is created
 using (var scope = app.Services.CreateScope())
