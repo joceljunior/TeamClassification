@@ -25,6 +25,11 @@ O projeto já está configurado com:
    - No dashboard do projeto, vá em "Variables"
    - Adicione: `ASPNETCORE_ENVIRONMENT=Production`
 
+3. **Aguarde o deploy:**
+   - Railway fará o build e deploy automaticamente
+   - O healthcheck agora usa o endpoint `/health`
+   - Timeout aumentado para 300 segundos
+
 ### 3. Banco de Dados SQLite
 
 O banco SQLite será criado automaticamente quando a aplicação iniciar. Não é necessário configuração adicional.

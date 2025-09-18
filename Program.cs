@@ -51,6 +51,9 @@ app.UseAuthorization();
 app.MapControllers();
 app.MapHub<ClassificationHub>("/classificationHub");
 
+// Add health check endpoint
+app.MapGet("/health", () => "OK");
+
 // Ensure database is created
 using (var scope = app.Services.CreateScope())
 {
@@ -60,4 +63,5 @@ using (var scope = app.Services.CreateScope())
 
 // Configure port for Railway
 var port = Environment.GetEnvironmentVariable("PORT") ?? "5000";
-app.Run($"http://0.0.0.0:{port}");
+var url = $"http://0.0.0.0:{port}";
+app.Run(url);
