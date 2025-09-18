@@ -208,6 +208,24 @@
         button:active {
             transform: translateY(0);
         }
+        
+        /* Touch-friendly improvements */
+        @media (hover: none) and (pointer: coarse) {
+            button:hover {
+                transform: none;
+                box-shadow: none;
+            }
+            
+            .item:hover {
+                transform: none;
+                box-shadow: 0 4px 12px rgba(0,0,0,0.1);
+            }
+            
+            button:active {
+                background: #3182ce;
+                transform: scale(0.98);
+            }
+        }
 
         .button-group {
             display: flex;
@@ -253,6 +271,19 @@
             overflow: hidden;
             box-shadow: 0 2px 8px rgba(0,0,0,0.1);
         }
+        
+        .mobile-menu-toggle {
+            display: none;
+            background: #4299e1;
+            color: white;
+            border: none;
+            padding: 12px;
+            border-radius: 8px;
+            margin-bottom: 10px;
+            width: 100%;
+            font-weight: 600;
+            cursor: pointer;
+        }
 
         .tab {
             flex: 1;
@@ -278,17 +309,177 @@
             display: block;
         }
 
+        /* Mobile Responsive Design */
         @media (max-width: 768px) {
+            .container {
+                padding: 10px;
+            }
+            
+            .header h1 {
+                font-size: 1.8rem;
+                line-height: 1.2;
+            }
+            
+            .header p {
+                font-size: 0.9rem;
+                margin-bottom: 15px;
+            }
+            
             .grid {
                 grid-template-columns: 1fr;
+                gap: 15px;
             }
             
             .form-grid {
                 grid-template-columns: 1fr;
+                gap: 15px;
+            }
+            
+            .card {
+                padding: 15px;
+                margin-bottom: 15px;
+            }
+            
+            .card h2 {
+                font-size: 1.3rem;
+                margin-bottom: 15px;
+            }
+            
+            .mobile-menu-toggle {
+                display: block;
+            }
+            
+            .tabs {
+                display: none;
+                flex-direction: column;
+                margin-bottom: 15px;
+            }
+            
+            .tabs.show {
+                display: flex;
+            }
+            
+            .tab {
+                padding: 12px 8px;
+                font-size: 0.9rem;
+                margin-bottom: 2px;
+            }
+            
+            .item {
+                padding: 12px;
+                margin: 8px 0;
+                flex-direction: column;
+                align-items: flex-start;
+            }
+            
+            .item .position {
+                font-size: 1.1rem;
+                margin-bottom: 5px;
+            }
+            
+            .item .name {
+                margin: 5px 0;
+                font-size: 1rem;
+            }
+            
+            .time-display {
+                align-items: flex-start;
+                margin-top: 8px;
+            }
+            
+            .score {
+                font-size: 1rem;
+            }
+            
+            .remaining-time {
+                font-size: 0.85rem;
+            }
+            
+            .form-section {
+                padding: 15px;
+                margin-bottom: 15px;
+            }
+            
+            .form-group {
+                margin-bottom: 15px;
+            }
+            
+            input, select, button {
+                padding: 10px;
+                font-size: 0.95rem;
+            }
+            
+            button {
+                margin-top: 8px;
+                padding: 12px;
+            }
+            
+            .button-group {
+                flex-direction: column;
+                gap: 8px;
+            }
+            
+            .history-item {
+                flex-direction: column;
+                align-items: flex-start;
+                padding: 10px;
+            }
+            
+            .empty-state {
+                padding: 20px;
+                font-size: 0.9rem;
+            }
+        }
+        
+        /* Extra small screens */
+        @media (max-width: 480px) {
+            .container {
+                padding: 5px;
             }
             
             .header h1 {
-                font-size: 2rem;
+                font-size: 1.5rem;
+            }
+            
+            .card {
+                padding: 10px;
+            }
+            
+            .card h2 {
+                font-size: 1.2rem;
+            }
+            
+            .tab {
+                padding: 10px 6px;
+                font-size: 0.85rem;
+            }
+            
+            .item {
+                padding: 10px;
+            }
+            
+            .form-section {
+                padding: 10px;
+            }
+            
+            input, select, button {
+                padding: 8px;
+                font-size: 0.9rem;
+            }
+        }
+        
+        /* Landscape mobile */
+        @media (max-width: 768px) and (orientation: landscape) {
+            .tabs {
+                flex-direction: row;
+                flex-wrap: wrap;
+            }
+            
+            .tab {
+                flex: 1;
+                min-width: 120px;
+                font-size: 0.8rem;
+                padding: 8px 4px;
             }
         }
     </style>
@@ -304,7 +495,11 @@
             Desconectado do servidor
         </div>
 
-        <div class="tabs">
+        <button class="mobile-menu-toggle" onclick="toggleMobileMenu()">
+            📱 Menu
+        </button>
+        
+        <div class="tabs" id="tabsMenu">
             <button class="tab active" onclick="showTab('classification')">📊 Classificação</button>
             <button class="tab" onclick="showTab('teams')">👥 Equipes</button>
             <button class="tab" onclick="showTab('participants')">👤 Participantes</button>
@@ -1106,6 +1301,17 @@
             // Mostrar aba selecionada
             document.getElementById(tabName).classList.add('active');
             event.target.classList.add('active');
+            
+            // Fechar menu mobile após seleção
+            if (window.innerWidth <= 768) {
+                document.getElementById('tabsMenu').classList.remove('show');
+            }
+        }
+        
+        // Controle do menu mobile
+        function toggleMobileMenu() {
+            const tabsMenu = document.getElementById('tabsMenu');
+            tabsMenu.classList.toggle('show');
         }
 
         // Iniciar conexão quando a página carregar
