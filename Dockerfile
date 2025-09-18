@@ -27,5 +27,10 @@ COPY --from=publish /app/publish .
 # Set environment variables
 ENV ASPNETCORE_ENVIRONMENT=Production
 ENV ASPNETCORE_URLS=http://0.0.0.0:5000
+ENV PORT=5000
+
+# Health check
+HEALTHCHECK --interval=30s --timeout=10s --start-period=60s --retries=3 \
+  CMD curl -f http://localhost:5000/health || exit 1
 
 ENTRYPOINT ["dotnet", "TeamClassification.dll"]
