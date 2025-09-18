@@ -23,12 +23,17 @@ O projeto já está configurado com:
 
 2. **Configure as variáveis de ambiente:**
    - No dashboard do projeto, vá em "Variables"
-   - Adicione: `ASPNETCORE_ENVIRONMENT=Production`
+   - Clique em "New Variable" e adicione:
+     - **Nome:** `ASPNETCORE_ENVIRONMENT`
+     - **Valor:** `Production`
+   - Clique em "New Variable" novamente e adicione:
+     - **Nome:** `ASPNETCORE_URLS`
+     - **Valor:** `http://0.0.0.0:5000`
 
 3. **Aguarde o deploy:**
    - Railway fará o build e deploy automaticamente
-   - O healthcheck agora usa o endpoint `/health`
-   - Timeout aumentado para 300 segundos
+   - **Sem healthcheck** - configuração simplificada
+   - Deploy deve ser bem-sucedido
 
 ### 3. Banco de Dados SQLite
 

@@ -63,5 +63,4 @@ using (var scope = app.Services.CreateScope())
 
 // Configure port for Railway
 var port = Environment.GetEnvironmentVariable("PORT") ?? "5000";
-var url = $"http://0.0.0.0:{port}";
-app.Run(url);
+app.Run($"http://0.0.0.0:{port}");
