@@ -274,15 +274,18 @@
         
         .mobile-menu-toggle {
             display: none;
-            background: #4299e1;
+            background: linear-gradient(135deg, #4299e1 0%, #3182ce 100%);
             color: white;
             border: none;
-            padding: 12px;
+            padding: 12px 15px;
             border-radius: 8px;
             margin-bottom: 10px;
             width: 100%;
             font-weight: 600;
             cursor: pointer;
+            text-align: left;
+            font-size: 1rem;
+            box-shadow: 0 2px 8px rgba(66, 153, 225, 0.2);
         }
 
         .tab {
@@ -353,6 +356,7 @@
                 display: none;
                 flex-direction: column;
                 margin-bottom: 15px;
+                text-align: left;
             }
             
             .tabs.show {
@@ -360,9 +364,19 @@
             }
             
             .tab {
-                padding: 12px 8px;
+                padding: 12px 15px;
                 font-size: 0.9rem;
                 margin-bottom: 2px;
+                text-align: left;
+                color: #333;
+                background: #f7fafc;
+                border-left: 4px solid #4299e1;
+            }
+            
+            .tab.active {
+                background: #4299e1;
+                color: white;
+                border-left-color: #3182ce;
             }
             
             .item {
@@ -450,8 +464,18 @@
             }
             
             .tab {
-                padding: 10px 6px;
+                padding: 10px 12px;
                 font-size: 0.85rem;
+                text-align: left;
+                color: #333;
+                background: #f7fafc;
+                border-left: 4px solid #4299e1;
+            }
+            
+            .tab.active {
+                background: #4299e1;
+                color: white;
+                border-left-color: #3182ce;
             }
             
             .item {
@@ -496,7 +520,7 @@
         </div>
 
         <button class="mobile-menu-toggle" onclick="toggleMobileMenu()">
-            📱 Menu
+            📱 Menu de Navegação
         </button>
         
         <div class="tabs" id="tabsMenu">
